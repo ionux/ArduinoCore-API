@@ -29,7 +29,8 @@
 #define OCT 8
 #define BIN 2
 
-namespace arduino {
+namespace arduino
+{
 
 class Print
 {
@@ -38,8 +39,10 @@ class Print
     size_t printNumber(unsigned long, uint8_t);
     size_t printULLNumber(unsigned long long, uint8_t);
     size_t printFloat(double, int);
+
   protected:
     void setWriteError(int err = 1) { write_error = err; }
+
   public:
     Print() : write_error(0) {}
 
@@ -47,12 +50,21 @@ class Print
     void clearWriteError() { setWriteError(0); }
 
     virtual size_t write(uint8_t) = 0;
-    size_t write(const char *str) {
-      if (str == NULL) return 0;
+
+    size_t write(const char *str)
+    {
+      if (str == NULL)
+      {
+        return 0;
+      }
+      
       return write((const uint8_t *)str, strlen(str));
     }
+
     virtual size_t write(const uint8_t *buffer, size_t size);
-    size_t write(const char *buffer, size_t size) {
+
+    size_t write(const char *buffer, size_t size)
+    {
       return write((const uint8_t *)buffer, size);
     }
 
@@ -91,6 +103,6 @@ class Print
 
     virtual void flush() { /* Empty implementation for backward compatibility */ }
 };
-
 }
+
 using arduino::Print;
